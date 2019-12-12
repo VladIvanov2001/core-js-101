@@ -283,9 +283,25 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  const str = `${ccn}`;
+  let sum = 0;
+
+  for (let i = 0; i < str.length; i += 1) {
+    let cardNumber = parseInt(str[i], 10);
+
+    if ((str.length - i) % 2 === 0) {
+      cardNumber *= 2;
+      if (cardNumber > 9) {
+        cardNumber -= 9;
+      }
+    }
+    sum += cardNumber;
+  }
+
+  return sum % 10 === 0;
 }
+
 
 /**
  * Returns the digital root of integer:
@@ -301,8 +317,12 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  let q = num;
+  while (q > 9) {
+    q = q.toString().split('').reduce((a, b) => Number(a) + Number(b));
+  }
+  return q;
 }
 
 
@@ -352,8 +372,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
